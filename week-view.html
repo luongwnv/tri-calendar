@@ -13,17 +13,17 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #1a1a1a;
+            background-color: #f5f5f5;
             padding: 20px;
-            color: #ffffff;
+            color: #333;
         }
 
         .calendar-container {
             max-width: 1400px;
             margin: 0 auto;
-            background: #2d2d2d;
+            background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             overflow: hidden;
         }
 
@@ -32,57 +32,57 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 30px;
-            background: #2d2d2d;
-            border-bottom: 1px solid #404040;
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .calendar-title {
             font-size: 28px;
             font-weight: 700;
-            color: #ffffff;
+            color: #2c3e50;
             margin-bottom: 5px;
         }
 
         .week-range {
             font-size: 16px;
             font-weight: 500;
-            color: #888;
+            color: #666;
         }
 
         .week-grid {
             display: grid;
             grid-template-columns: 80px repeat(7, 1fr);
-            background: #2d2d2d;
+            background: white;
         }
 
         .time-column {
-            background: #2d2d2d;
-            border-right: 1px solid #404040;
+            background: white;
+            border-right: 1px solid #e5e5e5;
         }
 
         .time-slot {
             height: 60px;
             padding: 10px;
             font-size: 12px;
-            color: #888;
-            border-bottom: 1px solid #404040;
+            color: #666;
+            border-bottom: 1px solid #f0f0f0;
             display: flex;
             align-items: flex-start;
         }
 
         .day-column {
-            border-right: 1px solid #404040;
+            border-right: 1px solid #e5e5e5;
             position: relative;
         }
 
         .day-header {
             text-align: center;
             padding: 15px;
-            background: #363636;
+            background: #f8f9fa;
             font-weight: 600;
-            color: #ffffff;
+            color: #333;
             font-size: 14px;
-            border-bottom: 1px solid #404040;
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .day-content {
@@ -95,7 +95,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: #404040;
+            background: #f0f0f0;
             z-index: 1;
         }
 
@@ -163,7 +163,7 @@
 
         .nav-button {
             background: transparent;
-            color: #888;
+            color: #666;
             border: none;
             border-radius: 6px;
             padding: 8px 12px;
@@ -173,12 +173,12 @@
         }
 
         .nav-button:hover {
-            color: #ffffff;
+            color: #333;
         }
 
         .today-button {
             background: transparent;
-            color: #888;
+            color: #666;
             border: none;
             font-size: 16px;
             font-weight: 500;
@@ -189,16 +189,15 @@
         }
 
         .today-button:hover {
-            color: #ffffff;
-            background: rgba(255,255,255,0.1);
+            color: #333;
+            background: #f5f5f5;
         }
 
         .view-toggle {
-            display: flex;
-            gap: 10px;
+            position: relative;
         }
 
-        .toggle-btn {
+        .view-selector {
             background: #4285f4;
             color: white;
             border: none;
@@ -206,16 +205,75 @@
             padding: 8px 16px;
             font-size: 14px;
             cursor: pointer;
-            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             transition: background-color 0.2s;
+            min-width: 100px;
         }
 
-        .toggle-btn:hover {
+        .view-selector:hover {
             background: #3367d6;
         }
 
-        .toggle-btn.active {
+        .view-selector:focus {
+            outline: none;
             background: #2451a3;
+        }
+
+        .dropdown-arrow {
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        .view-selector.open .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            min-width: 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 10px 16px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-item.active {
+            background: #e3f2fd;
+            color: #1565c0;
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
@@ -257,12 +315,19 @@
                 <button class="nav-button" onclick="nextWeek()">›</button>
             </div>
             <div class="view-toggle">
-                <a href="week-view.html" class="toggle-btn active">Week</a>
-                <a href="index.html" class="toggle-btn">Month</a>
-                <a href="year-view.html" class="toggle-btn">Year</a>
+                <button class="view-selector" onclick="toggleDropdown()">
+                    Week
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <div class="dropdown-menu" id="viewDropdown">
+                    <a href="week-view.html" class="dropdown-item active">Week</a>
+                    <a href="index.html" class="dropdown-item">Month</a>
+                    <a href="year-view.html" class="dropdown-item">Year</a>
+                </div>
             </div>
         </div>
         <div class="week-grid">
+            <div class="day-header"></div>
             <div class="day-header">Monday</div>
             <div class="day-header">Tuesday</div>
             <div class="day-header">Wednesday</div>
@@ -334,7 +399,7 @@
             // Add empty cell for header
             const emptyHeader = document.createElement('div');
             emptyHeader.className = 'day-header';
-            emptyHeader.style.background = '#2d2d2d';
+            emptyHeader.style.background = '#f8f9fa';
             timeColumn.appendChild(emptyHeader);
 
             // Add time slots
@@ -446,6 +511,23 @@
             const rosterData = await loadRosterData();
             generateWeekView(rosterData);
         }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('viewDropdown');
+            const selector = document.querySelector('.view-selector');
+            
+            dropdown.classList.toggle('show');
+            selector.classList.toggle('open');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const viewToggle = document.querySelector('.view-toggle');
+            if (!viewToggle.contains(event.target)) {
+                document.getElementById('viewDropdown').classList.remove('show');
+                document.querySelector('.view-selector').classList.remove('open');
+            }
+        });
 
         // Initialize the week view
         loadAndGenerateWeek();
