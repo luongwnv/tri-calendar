@@ -229,6 +229,26 @@
             border-right: none;
         }
 
+        .calendar-day.today {
+            background: rgba(25, 118, 210, 0.08);
+            border: 2px solid #1976d2;
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
+        }
+
+        .calendar-day.today .day-number {
+            color: #1976d2;
+            font-weight: 700;
+            background: #1976d2;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
         .day-number {
             font-size: 16px;
             font-weight: 500;
@@ -453,6 +473,12 @@
             .clock-icon {
                 font-size: 8px;
             }
+
+            .calendar-day.today .day-number {
+                width: 20px;
+                height: 20px;
+                font-size: 11px;
+            }
         }
     </style>
 </head>
@@ -560,16 +586,21 @@
                 const dateString = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
                 const rosterEntry = rosterData.find(entry => entry.date === dateString);
 
+                // Check if this is today
+                const dateOnly = new Date(date);
+                dateOnly.setHours(0, 0, 0, 0);
+                const isToday = dateOnly.getTime() === today.getTime();
+
+                if (isToday) {
+                    dayElement.classList.add('today');
+                }
+
                 if (rosterEntry && !rosterEntry.shift.startsWith('OFF')) {
                     // Apply color coding to all days with shifts
-                    const dateOnly = new Date(date);
-                    dateOnly.setHours(0, 0, 0, 0);
 
-                    if (dateOnly.getTime() === today.getTime()) {
-                        dayElement.classList.add('today');
-                    } else if (dateOnly < today) {
+                    if (dateOnly < today && !isToday) {
                         dayElement.classList.add('past-day');
-                    } else {
+                    } else if (dateOnly > today) {
                         dayElement.classList.add('future-day');
                     }
 
@@ -587,14 +618,10 @@
                     dayElement.appendChild(shiftInfo);
                 } else if (rosterEntry && rosterEntry.shift.startsWith('OFF')) {
                     // Handle OFF days separately
-                    const dateOnly = new Date(date);
-                    dateOnly.setHours(0, 0, 0, 0);
 
-                    if (dateOnly.getTime() === today.getTime()) {
-                        dayElement.classList.add('today');
-                    } else if (dateOnly < today) {
+                    if (dateOnly < today && !isToday) {
                         dayElement.classList.add('past-day');
-                    } else {
+                    } else if (dateOnly > today) {
                         dayElement.classList.add('future-day');
                     }
 
