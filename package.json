@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "axios": "^1.11.0",
+    "https-proxy-agent": "^7.0.6",
+    "xlsx": "^0.18.5"
+  }
+}

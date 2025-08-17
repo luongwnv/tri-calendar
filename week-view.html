@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week View - Driver Duty Roster Calendar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #1a1a1a;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .calendar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #2d2d2d;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: #2d2d2d;
+            border-bottom: 1px solid #404040;
+        }
+
+        .calendar-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .week-range {
+            font-size: 16px;
+            font-weight: 500;
+            color: #888;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: 80px repeat(7, 1fr);
+            background: #2d2d2d;
+        }
+
+        .time-column {
+            background: #2d2d2d;
+            border-right: 1px solid #404040;
+        }
+
+        .time-slot {
+            height: 60px;
+            padding: 10px;
+            font-size: 12px;
+            color: #888;
+            border-bottom: 1px solid #404040;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .day-column {
+            border-right: 1px solid #404040;
+            position: relative;
+        }
+
+        .day-header {
+            text-align: center;
+            padding: 15px;
+            background: #363636;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 14px;
+            border-bottom: 1px solid #404040;
+        }
+
+        .day-content {
+            position: relative;
+            height: 1440px; /* 24 hours * 60px */
+        }
+
+        .hour-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #404040;
+            z-index: 1;
+        }
+
+        .shift-block {
+            position: absolute;
+            left: 5px;
+            right: 5px;
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            z-index: 2;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .shift-block:hover {
+            opacity: 0.8;
+        }
+
+        .shift-block.shift-a {
+            background: #4285f4;
+            color: white;
+        }
+
+        .shift-block.shift-b {
+            background: #ff9800;
+            color: white;
+        }
+
+        .shift-block.shift-a1 {
+            background: #34a853;
+            color: white;
+        }
+
+        .shift-block.shift-c {
+            background: #9c27b0;
+            color: white;
+        }
+
+        .shift-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .shift-time-text {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .today-column {
+            background: rgba(255, 235, 59, 0.1);
+        }
+
+        .today-header {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-button {
+            background: transparent;
+            color: #888;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .nav-button:hover {
+            color: #ffffff;
+        }
+
+        .today-button {
+            background: transparent;
+            color: #888;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .today-button:hover {
+            color: #ffffff;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            background: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .toggle-btn:hover {
+            background: #3367d6;
+        }
+
+        .toggle-btn.active {
+            background: #2451a3;
+        }
+
+        @media (max-width: 768px) {
+            .week-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .time-column {
+                display: none;
+            }
+
+            .day-content {
+                height: auto;
+                min-height: 200px;
+            }
+
+            .shift-block {
+                position: static;
+                margin-bottom: 10px;
+            }
+
+            .calendar-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <div>
+                <h1 class="calendar-title">Lịch làm việc của Trí</h1>
+                <div class="week-range" id="weekRange">Week View</div>
+            </div>
+            <div class="nav-controls">
+                <button class="nav-button" onclick="previousWeek()">‹</button>
+                <button class="today-button" onclick="goToThisWeek()">This Week</button>
+                <button class="nav-button" onclick="nextWeek()">›</button>
+            </div>
+            <div class="view-toggle">
+                <a href="week-view.html" class="toggle-btn active">Week</a>
+                <a href="index.html" class="toggle-btn">Month</a>
+                <a href="year-view.html" class="toggle-btn">Year</a>
+            </div>
+        </div>
+        <div class="week-grid">
+            <div class="day-header">Monday</div>
+            <div class="day-header">Tuesday</div>
+            <div class="day-header">Wednesday</div>
+            <div class="day-header">Thursday</div>
+            <div class="day-header">Friday</div>
+            <div class="day-header">Saturday</div>
+            <div class="day-header">Sunday</div>
+        </div>
+        <div class="week-grid" id="weekGrid"></div>
+    </div>
+
+    <script>
+        let currentWeekStart = new Date();
+
+        // Set to start of current week (Monday)
+        function setToMondayOfWeek(date) {
+            const dayOfWeek = date.getDay();
+            const diff = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+            date.setDate(date.getDate() + diff);
+            date.setHours(0, 0, 0, 0);
+            return date;
+        }
+
+        currentWeekStart = setToMondayOfWeek(new Date());
+
+        async function loadRosterData() {
+            try {
+                const response = await fetch('./driver_duty_roster.json');
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error loading roster data:', error);
+                return [];
+            }
+        }
+
+        function formatShiftType(shift) {
+            if (shift.startsWith('OFF')) return 'shift-off';
+            if (shift === 'A1' || shift === 'A2') return 'shift-a1';
+            if (shift === 'A') return 'shift-a';
+            if (shift === 'B' || shift === 'B1') return 'shift-b';
+            if (shift === 'C' || shift === 'C1') return 'shift-c';
+            return 'shift-off';
+        }
+
+        function formatDate(date) {
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${months[date.getMonth()]} ${date.getDate()}`;
+        }
+
+        function generateWeekView(rosterData) {
+            const weekGrid = document.getElementById('weekGrid');
+            weekGrid.innerHTML = '';
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // Update week range display
+            const endOfWeek = new Date(currentWeekStart);
+            endOfWeek.setDate(currentWeekStart.getDate() + 6);
+            document.getElementById('weekRange').textContent = 
+                `${formatDate(currentWeekStart)} - ${formatDate(endOfWeek)}, ${currentWeekStart.getFullYear()}`;
+
+            // Add time column
+            const timeColumn = document.createElement('div');
+            timeColumn.className = 'time-column';
+            
+            // Add empty cell for header
+            const emptyHeader = document.createElement('div');
+            emptyHeader.className = 'day-header';
+            emptyHeader.style.background = '#2d2d2d';
+            timeColumn.appendChild(emptyHeader);
+
+            // Add time slots
+            for (let hour = 0; hour < 24; hour++) {
+                const timeSlot = document.createElement('div');
+                timeSlot.className = 'time-slot';
+                timeSlot.textContent = `${hour.toString().padStart(2, '0')}:00`;
+                timeColumn.appendChild(timeSlot);
+            }
+            weekGrid.appendChild(timeColumn);
+
+            // Generate 7 days for the week
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(currentWeekStart);
+                date.setDate(currentWeekStart.getDate() + i);
+
+                const dayColumn = document.createElement('div');
+                dayColumn.className = 'day-column';
+
+                const dateOnly = new Date(date);
+                dateOnly.setHours(0, 0, 0, 0);
+
+                // Day header
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'day-header';
+                if (dateOnly.getTime() === today.getTime()) {
+                    dayHeader.classList.add('today-header');
+                    dayColumn.classList.add('today-column');
+                }
+                
+                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                dayHeader.innerHTML = `
+                    <div>${dayNames[date.getDay()]}</div>
+                    <div style="font-size: 18px; font-weight: 700; margin-top: 2px;">${date.getDate()}</div>
+                `;
+                dayColumn.appendChild(dayHeader);
+
+                // Day content
+                const dayContent = document.createElement('div');
+                dayContent.className = 'day-content';
+
+                // Add hour lines
+                for (let hour = 0; hour < 24; hour++) {
+                    const hourLine = document.createElement('div');
+                    hourLine.className = 'hour-line';
+                    hourLine.style.top = `${hour * 60}px`;
+                    dayContent.appendChild(hourLine);
+                }
+
+                // Find roster data for this date
+                const dateString = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                const rosterEntry = rosterData.find(entry => entry.date === dateString);
+
+                if (rosterEntry && !rosterEntry.shift.startsWith('OFF')) {
+                    const shiftBlock = document.createElement('div');
+                    shiftBlock.className = `shift-block ${formatShiftType(rosterEntry.shift)}`;
+
+                    // Calculate position based on time
+                    let startHour = 9; // default
+                    let duration = 8; // default 8 hours
+
+                    if (rosterEntry.time) {
+                        const timeMatch = rosterEntry.time.match(/(\d+):(\d+)\s*-\s*(\d+):(\d+)/);
+                        if (timeMatch) {
+                            const startH = parseInt(timeMatch[1]);
+                            const startM = parseInt(timeMatch[2]);
+                            const endH = parseInt(timeMatch[3]);
+                            const endM = parseInt(timeMatch[4]);
+                            
+                            startHour = startH + startM / 60;
+                            let endTime = endH + endM / 60;
+                            if (endTime < startHour) endTime += 24; // next day
+                            duration = endTime - startHour;
+                        }
+                    }
+
+                    shiftBlock.style.top = `${startHour * 60}px`;
+                    shiftBlock.style.height = `${duration * 60 - 2}px`;
+
+                    shiftBlock.innerHTML = `
+                        <div class="shift-title">${rosterEntry.shift}</div>
+                        ${rosterEntry.time ? `<div class="shift-time-text">${rosterEntry.time}</div>` : ''}
+                    `;
+
+                    dayContent.appendChild(shiftBlock);
+                }
+
+                dayColumn.appendChild(dayContent);
+                weekGrid.appendChild(dayColumn);
+            }
+        }
+
+        function previousWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+            loadAndGenerateWeek();
+        }
+
+        function nextWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+            loadAndGenerateWeek();
+        }
+
+        function goToThisWeek() {
+            currentWeekStart = setToMondayOfWeek(new Date());
+            loadAndGenerateWeek();
+        }
+
+        async function loadAndGenerateWeek() {
+            const rosterData = await loadRosterData();
+            generateWeekView(rosterData);
+        }
+
+        // Initialize the week view
+        loadAndGenerateWeek();
+    </script>
+</body>
+</html>
