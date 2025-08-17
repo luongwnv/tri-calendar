@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,18 +13,21 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #1e1e1e;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f5f5f5;
             padding: 20px;
-            color: #ffffff;
+            color: #212121;
         }
 
         .calendar-container {
             max-width: 1400px;
             margin: 0 auto;
-            background: #2d2d2d;
-            border-radius: 16px;
+            background: #ffffff;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            border: 2px solid #e0e0e0;
+            min-height: 800px;
         }
 
         .calendar-header {
@@ -31,80 +35,87 @@
             justify-content: center;
             align-items: center;
             padding: 16px 24px;
-            background: #3a3a3a;
+            background: #ffffff;
             gap: 16px;
             position: relative;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .nav-button {
-            background: #4a4a4a;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
+            background: #ffffff;
+            color: #757575;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
             padding: 8px 12px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             min-width: 36px;
             height: 36px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .nav-button:hover {
-            background: #5a5a5a;
+            background: #f5f5f5;
+            color: #424242;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
         }
 
         .today-button {
-            background: #4a4a4a;
+            background: #1976d2;
             color: #ffffff;
             border: none;
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
             padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.2s;
+            border-radius: 4px;
+            transition: all 0.2s;
             height: 36px;
+            box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
         }
 
         .today-button:hover {
-            background: #5a5a5a;
+            background: #1565c0;
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
         }
 
         .week-range {
             font-size: 20px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #212121;
             min-width: 280px;
             text-align: center;
         }
 
         .view-toggle {
             position: absolute;
-            top: 16px;
             right: 24px;
         }
 
         .view-selector {
-            background: #4285f4;
+            background: #1976d2;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 8px 16px;
             font-size: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
             min-width: 100px;
             height: 36px;
+            box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
         }
 
         .view-selector:hover {
-            background: #3367d6;
+            background: #1565c0;
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
         }
 
         .dropdown-arrow {
@@ -120,10 +131,10 @@
             position: absolute;
             top: 100%;
             right: 0;
-            background: #2d2d2d;
-            border: 1px solid #4a4a4a;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             z-index: 1000;
             min-width: 120px;
             opacity: 0;
@@ -141,10 +152,10 @@
         .dropdown-item {
             display: block;
             padding: 12px 16px;
-            color: #ffffff;
+            color: #424242;
             text-decoration: none;
             font-size: 14px;
-            border-bottom: 1px solid #4a4a4a;
+            border-bottom: 1px solid #f5f5f5;
             transition: background-color 0.2s;
         }
 
@@ -153,55 +164,59 @@
         }
 
         .dropdown-item:hover {
-            background: #3a3a3a;
+            background: #f5f5f5;
         }
 
         .dropdown-item.active {
-            background: #4285f4;
-            color: white;
+            background: #e3f2fd;
+            color: #1976d2;
             font-weight: 500;
         }
 
         .week-grid {
             display: grid;
             grid-template-columns: 80px repeat(7, 1fr);
-            background: #2d2d2d;
+            background: #ffffff;
         }
 
         .time-column {
-            background: #2d2d2d;
-            border-right: 1px solid #4a4a4a;
+            background: #fafafa;
+            border-right: 2px solid #e0e0e0;
+        }
+
+        .time-column .day-header {
+            height: 73px;
         }
 
         .time-slot {
             height: 60px;
             padding: 10px;
             font-size: 12px;
-            color: #888;
-            border-bottom: 1px solid #3a3a3a;
+            color: #757575;
+            border-bottom: 2px solid #e0e0e0;
             display: flex;
             align-items: flex-start;
         }
 
         .day-column {
-            border-right: 1px solid #4a4a4a;
+            border-right: 2px solid #e0e0e0;
             position: relative;
         }
 
         .day-header {
             text-align: center;
             padding: 16px;
-            background: #3a3a3a;
-            font-weight: 600;
-            color: #ffffff;
+            background: #fafafa;
+            font-weight: 500;
+            color: #424242;
             font-size: 14px;
-            border-bottom: 1px solid #4a4a4a;
+            border-bottom: 2px solid #e0e0e0;
         }
 
         .day-content {
             position: relative;
             height: 1440px;
-            background: #2d2d2d;
+            background: #ffffff;
         }
 
         .hour-line {
@@ -209,7 +224,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: #3a3a3a;
+            background: #f5f5f5;
             z-index: 1;
         }
 
@@ -217,31 +232,35 @@
             position: absolute;
             left: 5px;
             right: 5px;
-            border-radius: 6px;
+            border-radius: 4px;
             padding: 8px;
             font-size: 12px;
             font-weight: 500;
             z-index: 2;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .shift-block:hover {
-            opacity: 0.8;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
         }
 
         .shift-block.shift-a {
-            background: #4285f4;
-            color: white;
-        }
-
-        .shift-block.shift-b {
-            background: #ff9800;
-            color: white;
+            background: #ffffff;
+            color: #424242;
+            border: 1px solid #e0e0e0;
         }
 
         .shift-block.shift-a1 {
-            background: #34a853;
+            background: #ffffff;
+            color: #424242;
+            border: 1px solid #e0e0e0;
+        }
+
+        .shift-block.shift-b {
+            background: #e65100;
             color: white;
         }
 
@@ -250,22 +269,50 @@
             color: white;
         }
 
+        .shift-block.shift-off {
+            background: #ffeb3b;
+            color: #424242;
+            font-weight: 600;
+        }
+
+        .shift-block .shift-time-text {
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .shift-block.past-shift:not(.past-off-shift) {
+            background: linear-gradient(135deg, #388e3c, #2e7d32) !important;
+            color: white !important;
+        }
+
+        .shift-block.past-off-shift {
+            background: #ffffff !important;
+            border: 1px solid #e0e0e0 !important;
+            color: transparent !important;
+        }
+
         .today-column {
-            background: rgba(66, 133, 244, 0.1);
+            background: rgba(33, 150, 243, 0.05);
         }
 
         .today-header {
-            background: #4285f4;
-            color: white;
+            background: #e3f2fd;
+            color: #1976d2;
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
+            .week-grid:not(#weekGrid) {
+                display: none !important;
+            }
+
             .week-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 40px repeat(7, 1fr);
+                overflow-x: visible;
             }
 
             .time-column {
-                display: none;
+                display: block;
             }
 
             .day-content {
@@ -274,17 +321,233 @@
             }
 
             .shift-block {
-                position: static;
-                margin-bottom: 10px;
+                position: absolute;
+                margin-bottom: 0;
             }
 
             .calendar-header {
                 flex-direction: column;
                 gap: 10px;
             }
+
+            .day-header {
+                font-size: 10px;
+                padding: 6px 2px;
+            }
+
+            .time-slot {
+                height: 30px;
+                font-size: 8px;
+                padding: 3px 1px;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .week-grid:not(#weekGrid) {
+                display: none !important;
+            }
+
+            body {
+                padding: 6px;
+            }
+
+            .calendar-container {
+                border-radius: 10px;
+                overflow-x: visible;
+            }
+
+            .calendar-header {
+                padding: 6px 10px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 3px;
+                flex-wrap: wrap;
+            }
+
+            .view-toggle {
+                order: 1;
+            }
+
+            .nav-button {
+                min-width: 28px;
+                height: 28px;
+                font-size: 12px;
+                order: 2;
+                padding: 2px 6px;
+            }
+
+            .today-button {
+                height: 28px;
+                font-size: 10px;
+                padding: 2px 6px;
+                order: 3;
+            }
+
+            .week-range {
+                font-size: 12px;
+                min-width: auto;
+                order: 4;
+                flex: 1;
+                text-align: center;
+                min-width: 0;
+            }
+
+            .view-selector {
+                height: 28px;
+                font-size: 10px;
+                padding: 2px 6px;
+                min-width: 60px;
+            }
+
+            /* Stack week range on second row */
+            .week-range {
+                order: 5;
+                width: 100%;
+                text-align: left;
+                font-size: 12px;
+            }
+
+            .week-grid {
+                grid-template-columns: 35px repeat(7, 1fr);
+                gap: 0;
+                background: #ffffff;
+                overflow-x: visible;
+                width: 100%;
+                max-width: 100%;
+                border-bottom: 1px solid #d0d0d0;
+            }
+
+            .time-column {
+                background: #fafafa;
+                border-right: 1px solid #e0e0e0;
+                min-width: 35px;
+            }
+
+            .time-column .day-header {
+                height: 41px;
+            }
+
+            .time-slot {
+                height: 30px;
+                padding: 2px 1px;
+                font-size: 7px;
+                border-bottom: 1px solid #e0e0e0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .day-column {
+                border-right: 1px solid #e0e0e0;
+                min-width: 0;
+                flex: 1;
+            }
+
+            .day-header {
+                padding: 4px 1px;
+                font-size: 8px;
+                text-align: center;
+                line-height: 1.1;
+                height: 41px;
+                min-height: 35px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .day-header div:first-child {
+                font-size: 7px;
+                margin-bottom: 1px;
+            }
+
+            .day-header div:last-child {
+                font-size: 10px;
+                font-weight: 700;
+            }
+
+            .day-content {
+                height: auto;
+                min-height: 200px;
+                padding: 0;
+                background: #ffffff;
+                position: relative;
+            }
+
+            .shift-block {
+                position: absolute;
+                left: 1px;
+                right: 1px;
+                border-radius: 2px;
+                padding: 2px;
+                font-size: 7px;
+                line-height: 1.1;
+            }
+
+            .shift-block .shift-title {
+                font-size: 7px;
+                font-weight: 600;
+            }
+
+            .shift-block .shift-time-text {
+                font-size: 6px;
+                opacity: 0.9;
+                margin-top: 1px;
+                display: none;
+                /* Hide time text on very small screens */
+            }
+
+            .hour-line {
+                display: block;
+                background: #f0f0f0;
+            }
+
+            .nav-controls {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
+                order: 1;
+            }
+
+            /* Remove horizontal scrolling */
+            .calendar-container {
+                overflow-x: visible;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 320px) {
+            .time-slot {
+                font-size: 6px;
+                height: 20px;
+            }
+
+            .day-header {
+                min-height: 30px;
+                padding: 2px 0;
+            }
+
+            .day-header div:first-child {
+                font-size: 6px;
+            }
+
+            .day-header div:last-child {
+                font-size: 8px;
+            }
+
+            .shift-block .shift-title {
+                font-size: 6px;
+            }
+
+            .day-content {
+                min-height: 150px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="calendar-container">
         <div class="calendar-header">
@@ -292,11 +555,11 @@
             <button class="today-button" onclick="goToThisWeek()">This Week</button>
             <div class="week-range" id="weekRange">Week View</div>
             <button class="nav-button" onclick="nextWeek()">›</button>
-            
+
             <div class="view-toggle">
                 <button class="view-selector" onclick="toggleDropdown()">
                     Week
-                   <span class="dropdown-arrow">˅</span>
+                    <span class="dropdown-arrow">˅</span>
                 </button>
                 <div class="dropdown-menu" id="viewDropdown">
                     <a href="week-view.html" class="dropdown-item active">Week</a>
@@ -358,6 +621,58 @@
             return `${months[date.getMonth()]} ${date.getDate()}`;
         }
 
+        function findTimeRange(rosterData, currentWeekStart) {
+            let earliestHour = 24;
+            let latestHour = 0;
+
+            // Check all 7 days of the current week
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(currentWeekStart);
+                date.setDate(currentWeekStart.getDate() + i);
+
+                const dateString = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                const rosterEntry = rosterData.find(entry => entry.date === dateString);
+
+                if (rosterEntry && rosterEntry.time && !rosterEntry.shift.startsWith('OFF')) {
+                    const timeMatch = rosterEntry.time.match(/(\d+):(\d+)\s*-\s*(\d+):(\d+)/);
+                    if (timeMatch) {
+                        const startH = parseInt(timeMatch[1]);
+                        const endH = parseInt(timeMatch[3]);
+
+                        earliestHour = Math.min(earliestHour, startH);
+
+                        // Handle overnight shifts properly
+                        if (endH < startH) {
+                            // Overnight shift - end time is next day
+                            latestHour = Math.max(latestHour, endH + 24);
+                        } else {
+                            // Regular shift - same day
+                            latestHour = Math.max(latestHour, endH);
+                        }
+                    }
+                }
+            }
+
+            // If no data found, default to work hours
+            if (earliestHour === 24) {
+                earliestHour = 6;
+                latestHour = 22;
+            } else {
+                // Add padding
+                earliestHour = Math.max(0, earliestHour - 1);
+                latestHour = latestHour + 1;
+
+                // If latestHour goes beyond 24, we need to show next day hours
+                if (latestHour > 24) {
+                    // Keep as is to show hours beyond midnight
+                } else {
+                    latestHour = Math.min(24, latestHour);
+                }
+            }
+
+            return { start: earliestHour, end: latestHour };
+        }
+
         function generateWeekView(rosterData) {
             const weekGrid = document.getElementById('weekGrid');
             weekGrid.innerHTML = '';
@@ -368,24 +683,44 @@
             // Update week range display
             const endOfWeek = new Date(currentWeekStart);
             endOfWeek.setDate(currentWeekStart.getDate() + 6);
-            document.getElementById('weekRange').textContent = 
+            document.getElementById('weekRange').textContent =
                 `${formatDate(currentWeekStart)} - ${formatDate(endOfWeek)}, ${currentWeekStart.getFullYear()}`;
+
+            // Find the time range based on actual data
+            const timeRange = findTimeRange(rosterData, currentWeekStart);
+            const totalHours = timeRange.end - timeRange.start;
 
             // Add time column
             const timeColumn = document.createElement('div');
             timeColumn.className = 'time-column';
-            
+
             // Add empty cell for header
             const emptyHeader = document.createElement('div');
             emptyHeader.className = 'day-header';
-            emptyHeader.style.background = '#f8f9fa';
+            emptyHeader.style.background = '#fafafa';
             timeColumn.appendChild(emptyHeader);
 
-            // Add time slots
-            for (let hour = 0; hour < 24; hour++) {
+            // Add time slots for the calculated range
+            for (let hour = timeRange.start; hour < timeRange.end; hour++) {
                 const timeSlot = document.createElement('div');
                 timeSlot.className = 'time-slot';
-                timeSlot.textContent = `${hour.toString().padStart(2, '0')}:00`;
+
+                // Handle hours beyond 24 (next day)
+                let displayHour;
+                let dayIndicator = '';
+
+                if (hour >= 24) {
+                    displayHour = hour - 24;
+                    dayIndicator = '+1'; // Next day indicator
+                } else {
+                    displayHour = hour;
+                }
+
+                timeSlot.innerHTML = `
+                    ${displayHour.toString().padStart(2, '0')}:00
+                    ${dayIndicator ? `<span style="font-size: 10px; color: #666; margin-left: 4px;">${dayIndicator}</span>` : ''}
+                `;
+
                 timeColumn.appendChild(timeSlot);
             }
             weekGrid.appendChild(timeColumn);
@@ -408,7 +743,7 @@
                     dayHeader.classList.add('today-header');
                     dayColumn.classList.add('today-column');
                 }
-                
+
                 const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 dayHeader.innerHTML = `
                     <div>${dayNames[date.getDay()]}</div>
@@ -419,12 +754,15 @@
                 // Day content
                 const dayContent = document.createElement('div');
                 dayContent.className = 'day-content';
+                const isMobile = window.innerWidth <= 414;
+                const pixelsPerHour = isMobile ? 30 : 60;
+                dayContent.style.height = `${totalHours * pixelsPerHour}px`;
 
-                // Add hour lines
-                for (let hour = 0; hour < 24; hour++) {
+                // Add hour lines for the calculated range
+                for (let hour = 0; hour < totalHours; hour++) {
                     const hourLine = document.createElement('div');
                     hourLine.className = 'hour-line';
-                    hourLine.style.top = `${hour * 60}px`;
+                    hourLine.style.top = `${hour * pixelsPerHour}px`;
                     dayContent.appendChild(hourLine);
                 }
 
@@ -434,9 +772,16 @@
 
                 if (rosterEntry && !rosterEntry.shift.startsWith('OFF')) {
                     const shiftBlock = document.createElement('div');
-                    shiftBlock.className = `shift-block ${formatShiftType(rosterEntry.shift)}`;
+                    let shiftClasses = `shift-block ${formatShiftType(rosterEntry.shift)}`;
 
-                    // Calculate position based on time
+                    // Add past-shift class for past days
+                    if (dateOnly < today) {
+                        shiftClasses += ' past-shift';
+                    }
+
+                    shiftBlock.className = shiftClasses;
+
+                    // Calculate position based on time relative to start time
                     let startHour = 9; // default
                     let duration = 8; // default 8 hours
 
@@ -447,16 +792,26 @@
                             const startM = parseInt(timeMatch[2]);
                             const endH = parseInt(timeMatch[3]);
                             const endM = parseInt(timeMatch[4]);
-                            
+
                             startHour = startH + startM / 60;
                             let endTime = endH + endM / 60;
-                            if (endTime < startHour) endTime += 24; // next day
+
+                            // Handle overnight shifts
+                            if (endTime < startHour) {
+                                endTime += 24; // next day
+                            }
+
                             duration = endTime - startHour;
                         }
                     }
 
-                    shiftBlock.style.top = `${startHour * 60}px`;
-                    shiftBlock.style.height = `${duration * 60 - 2}px`;
+                    // Position relative to the time range start
+                    const relativeStart = startHour - timeRange.start;
+
+                    // Use different pixel ratios for mobile vs desktop
+
+                    shiftBlock.style.top = `${relativeStart * pixelsPerHour}px`;
+                    shiftBlock.style.height = `${duration * pixelsPerHour - 2}px`;
 
                     shiftBlock.innerHTML = `
                         <div class="shift-title">${rosterEntry.shift}</div>
@@ -464,11 +819,38 @@
                     `;
 
                     dayContent.appendChild(shiftBlock);
+                } else if (rosterEntry && rosterEntry.shift.startsWith('OFF')) {
+                    // Handle OFF days
+                    const shiftBlock = document.createElement('div');
+                    let shiftClasses = `shift-block ${formatShiftType(rosterEntry.shift)}`;
+
+                    if (dateOnly < today) {
+                        shiftClasses += ' past-off-shift';
+                    }
+
+                    shiftBlock.className = shiftClasses;
+
+                    // Position for full day
+
+                    shiftBlock.style.top = '0px';
+                    shiftBlock.style.height = `${totalHours * pixelsPerHour - 2}px`;
+
+                    // Don't show text for OFF days
+                    shiftBlock.innerHTML = `<div class="shift-title">&nbsp;</div>`;
+
+                    dayContent.appendChild(shiftBlock);
                 }
 
                 dayColumn.appendChild(dayContent);
                 weekGrid.appendChild(dayColumn);
             }
+
+            // Make the week grid scrollable but don't auto-scroll
+            weekGrid.style.maxHeight = 'calc(100vh - 200px)';
+            weekGrid.style.overflowY = 'auto';
+
+            // Don't auto-scroll - let user scroll manually if needed
+            // The view will start at the beginning of the time range
         }
 
         function previousWeek() {
@@ -494,13 +876,13 @@
         function toggleDropdown() {
             const dropdown = document.getElementById('viewDropdown');
             const selector = document.querySelector('.view-selector');
-            
+
             dropdown.classList.toggle('show');
             selector.classList.toggle('open');
         }
 
         // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const viewToggle = document.querySelector('.view-toggle');
             if (!viewToggle.contains(event.target)) {
                 document.getElementById('viewDropdown').classList.remove('show');
@@ -512,4 +894,5 @@
         loadAndGenerateWeek();
     </script>
 </body>
+
 </html>

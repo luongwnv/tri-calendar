@@ -13,18 +13,21 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #1e1e1e;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f5f5f5;
             padding: 20px;
-            color: #ffffff;
+            color: #212121;
         }
 
         .calendar-container {
             max-width: 1400px;
             margin: 0 auto;
-            background: #2d2d2d;
-            border-radius: 16px;
+            background: #ffffff;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            border: 2px solid #e0e0e0;
+            min-height: 800px;
         }
 
         .calendar-header {
@@ -32,85 +35,93 @@
             justify-content: center;
             align-items: center;
             padding: 16px 24px;
-            background: #3a3a3a;
+            background: #ffffff;
             gap: 16px;
             position: relative;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .nav-button {
-            background: #4a4a4a;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
+            background: #ffffff;
+            color: #757575;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
             padding: 8px 12px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             min-width: 36px;
             height: 36px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .nav-button:hover {
-            background: #5a5a5a;
+            background: #f5f5f5;
+            color: #424242;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
         }
 
         .today-button {
-            background: #4a4a4a;
+            background: #1976d2;
             color: #ffffff;
             border: none;
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
             padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.2s;
+            border-radius: 4px;
+            transition: all 0.2s;
             height: 36px;
+            box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
         }
 
         .today-button:hover {
-            background: #5a5a5a;
+            background: #1565c0;
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
         }
 
         .month-year {
             font-size: 24px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #212121;
             min-width: 180px;
             text-align: center;
         }
 
         .view-toggle {
             position: absolute;
-            top: 16px;
             right: 24px;
         }
 
         .view-selector {
-            background: #4285f4;
+            background: #1976d2;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 8px 16px;
             font-size: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
             min-width: 100px;
             height: 36px;
+            box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
         }
 
         .view-selector:hover {
-            background: #3367d6;
+            background: #1565c0;
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
         }
 
         .view-selector:focus {
             outline: none;
-            background: #2451a3;
+            background: #0d47a1;
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.5);
         }
 
         .dropdown-arrow {
@@ -126,10 +137,10 @@
             position: absolute;
             top: 100%;
             right: 0;
-            background: #2d2d2d;
-            border: 1px solid #4a4a4a;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             z-index: 1000;
             min-width: 120px;
             opacity: 0;
@@ -147,10 +158,10 @@
         .dropdown-item {
             display: block;
             padding: 12px 16px;
-            color: #ffffff;
+            color: #424242;
             text-decoration: none;
             font-size: 14px;
-            border-bottom: 1px solid #4a4a4a;
+            border-bottom: 1px solid #f5f5f5;
             transition: background-color 0.2s;
         }
 
@@ -159,121 +170,163 @@
         }
 
         .dropdown-item:hover {
-            background: #3a3a3a;
+            background: #f5f5f5;
         }
 
         .dropdown-item.active {
-            background: #4285f4;
-            color: white;
+            background: #e3f2fd;
+            color: #1976d2;
             font-weight: 500;
         }
 
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 1px;
-            background: #1e1e1e;
+            gap: 0;
+            background: #ffffff;
         }
 
         .day-header {
-            background: #3a3a3a;
+            background: #fafafa;
             padding: 16px 10px;
             text-align: center;
-            font-weight: 600;
-            color: #888;
+            font-weight: 500;
+            color: #757575;
             font-size: 14px;
+            border-bottom: 2px solid #e0e0e0;
+            border-right: 2px solid #e0e0e0;
+        }
+
+        .day-header:last-child {
+            border-right: none;
         }
 
         .calendar-days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 1px;
-            background: #1e1e1e;
+            gap: 0;
+            background: #ffffff;
+            /* min-height: 720px; */
         }
 
         .calendar-day {
-            background: #2d2d2d;
+            background: #ffffff;
             min-height: 120px;
             padding: 12px;
             display: flex;
             flex-direction: column;
             position: relative;
+            border-bottom: 2px solid #e0e0e0;
+            border-right: 2px solid #e0e0e0;
+            transition: background-color 0.2s;
+        }
+
+        .calendar-day:hover {
+            background: #fafafa;
+        }
+
+        .calendar-day:nth-child(7n) {
+            border-right: none;
         }
 
         .day-number {
             font-size: 16px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #424242;
             margin-bottom: 8px;
         }
 
         .shift-info {
             flex: 1;
-            background: #1e1e1e;
-            border-radius: 6px;
-            padding: 8px 10px;
+            border-radius: 3px;
+            padding: 10px 12px;
             margin-bottom: 4px;
             font-size: 14px;
-            border-left: 3px solid #4a4a4a;
+            font-weight: 500;
             color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .shift-info:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .shift-info.shift-a {
-            background: #1e3a8a;
-            border-left-color: #4285f4;
-            color: #93c5fd;
-        }
-
-        .shift-info.shift-b {
-            background: #92400e;
-            border-left-color: #ff9800;
-            color: #fbbf24;
+            background: linear-gradient(135deg, #ffffff, #f5f5f5);
+            color: #424242;
+            border: 1px solid #e0e0e0;
         }
 
         .shift-info.shift-a1 {
-            background: #166534;
-            border-left-color: #34a853;
-            color: #86efac;
+            background: linear-gradient(135deg, #ffffff, #f5f5f5);
+            color: #424242;
+            border: 1px solid #e0e0e0;
+        }
+
+        .shift-info.shift-b {
+            background: linear-gradient(135deg, #e65100, #bf360c);
+            color: #ffffff;
         }
 
         .shift-info.shift-c {
-            background: #581c87;
-            border-left-color: #9c27b0;
-            color: #d8b4fe;
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+            color: #ffffff;
+        }
+
+        .shift-info.shift-off {
+            background: linear-gradient(135deg, #ffeb3b, #fdd835);
+            color: #424242;
+            font-weight: 600;
         }
 
         .shift-time {
-            font-size: 12px;
-            opacity: 0.8;
+            font-size: 14px;
+            opacity: 0.9;
             margin-top: 4px;
             display: flex;
             align-items: center;
             gap: 4px;
+            font-weight: 500;
+            text-align: center;
         }
 
-        .clock-icon {
-            font-size: 12px;
+        .shift-info.shift-a .shift-time {
+            color: #424242;
         }
 
-        .today {
-            background: #1e40af !important;
-            border: 2px solid #4285f4;
+        .shift-info.shift-off .shift-time {
+            color: #424242;
         }
 
-        .past-day {
-            background: #1f2937 !important;
+        .past-day .shift-info:not(.past-off-day) {
+            background: linear-gradient(135deg, #388e3c, #2e7d32) !important;
+            color: #ffffff !important;
+        }
+
+        .past-day .shift-info:not(.past-off-day) .shift-time {
+            color: #ffffff !important;
+        }
+
+        .shift-info.past-off-day {
+            background: #ffffff !important;
+            border: 1px solid #e0e0e0 !important;
+            color: transparent !important;
+            visibility: hidden;
         }
 
         .future-day {
-            background: #2d2d2d !important;
+            background: #ffffff !important;
         }
 
         .other-month {
-            opacity: 0.3;
+            opacity: 0.4;
         }
 
         .other-month .day-number {
-            color: #666;
+            color: #bdbdbd;
         }
 
         @media (max-width: 768px) {
@@ -291,6 +344,8 @@
             .calendar-day {
                 min-height: 80px;
                 padding: 8px;
+                /* max-height: 99px; */
+                height: 100px;
             }
 
             .day-number {
@@ -299,12 +354,104 @@
             }
 
             .shift-info {
-                font-size: 12px;
+                font-size: 14px;
                 padding: 6px 8px;
             }
 
             .shift-time {
                 font-size: 10px;
+            }
+        }
+
+        @media (max-width: 414px) {
+            body {
+                padding: 6px;
+            }
+
+            .calendar-container {
+                border-radius: 10px;
+            }
+
+            .calendar-header {
+                padding: 6px 10px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 3px;
+                flex-wrap: wrap;
+            }
+
+            .view-toggle {
+                order: 1;
+            }
+
+            .nav-button {
+                min-width: 28px;
+                height: 28px;
+                font-size: 12px;
+                order: 2;
+                padding: 2px 6px;
+            }
+
+            .today-button {
+                height: 28px;
+                font-size: 10px;
+                padding: 2px 6px;
+                order: 3;
+            }
+
+            .month-year {
+                font-size: 12px;
+                order: 4;
+                flex: 1;
+                text-align: center;
+                min-width: 0;
+            }
+
+            .view-selector {
+                height: 28px;
+                font-size: 10px;
+                padding: 2px 6px;
+                min-width: 60px;
+            }
+
+            /* Stack month-year on second row */
+            .month-year {
+                order: 5;
+                width: 100%;
+                text-align: left;
+                font-size: 14px;
+            }
+
+            .day-header {
+                padding: 8px 4px;
+                font-size: 11px;
+            }
+
+            .calendar-day {
+                min-height: 30px;
+                padding: 8px 4px;
+            }
+
+            .day-number {
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+
+            .shift-info {
+                font-size: 10px;
+                padding: 4px 6px;
+                margin-bottom: 2px;
+            }
+
+            .shift-time {
+                font-size: 10px;
+                gap: 2px;
+                margin-top: 2px;
+            }
+
+            .clock-icon {
+                font-size: 8px;
             }
         }
     </style>
@@ -325,8 +472,8 @@
                 </button>
                 <div class="dropdown-menu" id="viewDropdown">
                     <a href="week-view.html" class="dropdown-item">Week</a>
-                    <a href="index.html" class="dropdown-item">Month</a>
-                    <a href="year-view.html" class="dropdown-item active">Year</a>
+                    <a href="index.html" class="dropdown-item active">Month</a>
+                    <a href="year-view.html" class="dropdown-item">Year</a>
                 </div>
             </div>
         </div>
@@ -414,7 +561,7 @@
                 const rosterEntry = rosterData.find(entry => entry.date === dateString);
 
                 if (rosterEntry && !rosterEntry.shift.startsWith('OFF')) {
-                    // Only apply color coding to days with shifts
+                    // Apply color coding to all days with shifts
                     const dateOnly = new Date(date);
                     dateOnly.setHours(0, 0, 0, 0);
 
@@ -433,9 +580,35 @@
                     if (rosterEntry.time) {
                         const shiftTime = document.createElement('div');
                         shiftTime.className = 'shift-time';
-                        shiftTime.innerHTML = `<span class="clock-icon">⏱️</span>${rosterEntry.time}`;
+                        shiftTime.innerHTML = `${rosterEntry.time}`;
                         shiftInfo.appendChild(shiftTime);
                     }
+
+                    dayElement.appendChild(shiftInfo);
+                } else if (rosterEntry && rosterEntry.shift.startsWith('OFF')) {
+                    // Handle OFF days separately
+                    const dateOnly = new Date(date);
+                    dateOnly.setHours(0, 0, 0, 0);
+
+                    if (dateOnly.getTime() === today.getTime()) {
+                        dayElement.classList.add('today');
+                    } else if (dateOnly < today) {
+                        dayElement.classList.add('past-day');
+                    } else {
+                        dayElement.classList.add('future-day');
+                    }
+
+                    const shiftInfo = document.createElement('div');
+                    let shiftClasses = `shift-info ${formatShiftType(rosterEntry.shift)}`;
+
+                    // Make past OFF days white
+                    if (dateOnly < today) {
+                        shiftClasses += ' past-off-day';
+                    }
+
+                    shiftInfo.className = shiftClasses;
+                    // Don't show text for OFF days
+                    shiftInfo.innerHTML = 'OFF'; // Empty space to maintain layout
 
                     dayElement.appendChild(shiftInfo);
                 }

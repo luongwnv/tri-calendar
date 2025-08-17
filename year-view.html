@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,18 +13,21 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #1e1e1e;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f5f5f5;
             padding: 20px;
-            color: #ffffff;
+            color: #212121;
         }
 
         .calendar-container {
             max-width: 1400px;
             margin: 0 auto;
-            background: #2d2d2d;
-            border-radius: 16px;
+            background: #ffffff;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            border: 2px solid #e0e0e0;
+            min-height: 800px;
         }
 
         .calendar-header {
@@ -31,80 +35,87 @@
             justify-content: center;
             align-items: center;
             padding: 16px 24px;
-            background: #3a3a3a;
+            background: #ffffff;
             gap: 16px;
             position: relative;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .nav-button {
-            background: #4a4a4a;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
+            background: #ffffff;
+            color: #757575;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
             padding: 8px 12px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             min-width: 36px;
             height: 36px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .nav-button:hover {
-            background: #5a5a5a;
+            background: #f5f5f5;
+            color: #424242;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
         }
 
         .today-button {
-            background: #4a4a4a;
+            background: #1976d2;
             color: #ffffff;
             border: none;
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
             padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.2s;
+            border-radius: 4px;
+            transition: all 0.2s;
             height: 36px;
+            box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
         }
 
         .today-button:hover {
-            background: #5a5a5a;
+            background: #1565c0;
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
         }
 
         .year-range {
             font-size: 24px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #212121;
             min-width: 180px;
             text-align: center;
         }
 
         .view-toggle {
             position: absolute;
-            top: 16px;
             right: 24px;
         }
 
         .view-selector {
-            background: #4285f4;
+            background: #1976d2;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 8px 16px;
             font-size: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
             min-width: 100px;
             height: 36px;
+            box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
         }
 
         .view-selector:hover {
-            background: #3367d6;
+            background: #1565c0;
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
         }
 
         .dropdown-arrow {
@@ -120,10 +131,10 @@
             position: absolute;
             top: 100%;
             right: 0;
-            background: #2d2d2d;
-            border: 1px solid #4a4a4a;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             z-index: 1000;
             min-width: 120px;
             opacity: 0;
@@ -141,10 +152,10 @@
         .dropdown-item {
             display: block;
             padding: 12px 16px;
-            color: #ffffff;
+            color: #424242;
             text-decoration: none;
             font-size: 14px;
-            border-bottom: 1px solid #4a4a4a;
+            border-bottom: 1px solid #f5f5f5;
             transition: background-color 0.2s;
         }
 
@@ -153,12 +164,12 @@
         }
 
         .dropdown-item:hover {
-            background: #3a3a3a;
+            background: #f5f5f5;
         }
 
         .dropdown-item.active {
-            background: #4285f4;
-            color: white;
+            background: #e3f2fd;
+            color: #1976d2;
             font-weight: 500;
         }
 
@@ -167,21 +178,28 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             padding: 20px;
-            background: #2d2d2d;
+            background: #f5f5f5;
+            min-height: 720px;
         }
 
         .month-container {
-            background: #3a3a3a;
+            background: #ffffff;
             border-radius: 8px;
             padding: 15px;
-            border: 1px solid #4a4a4a;
+            border: 2px solid #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.2s;
+        }
+
+        .month-container:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
         .month-header {
             text-align: center;
             font-size: 16px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #424242;
             margin-bottom: 10px;
         }
 
@@ -192,16 +210,17 @@
         }
 
         .mini-day-header {
-            background: #4a4a4a;
+            background: #f5f5f5;
             padding: 4px 2px;
             text-align: center;
             font-size: 10px;
-            font-weight: 600;
-            color: #888;
+            font-weight: 500;
+            color: #757575;
+            border: 2px solid #e0e0e0;
         }
 
         .mini-day {
-            background: #2d2d2d;
+            background: #ffffff;
             min-height: 25px;
             padding: 2px;
             display: flex;
@@ -210,11 +229,12 @@
             justify-content: flex-start;
             position: relative;
             font-size: 10px;
+            border: 2px solid #e0e0e0;
         }
 
         .mini-day-number {
             font-size: 9px;
-            color: #ffffff;
+            color: #424242;
             line-height: 1;
         }
 
@@ -230,32 +250,53 @@
         }
 
         .mini-shift.shift-a {
-            background: #4285f4;
-        }
-
-        .mini-shift.shift-b {
-            background: #ff9800;
+            background: #ffffff;
+            color: #424242;
+            border: 1px solid #e0e0e0;
         }
 
         .mini-shift.shift-a1 {
-            background: #34a853;
+            background: #ffffff;
+            color: #424242;
+            border: 1px solid #e0e0e0;
+        }
+
+        .mini-shift.shift-b {
+            background: #e65100;
         }
 
         .mini-shift.shift-c {
             background: #9c27b0;
         }
 
+        .mini-shift.shift-off {
+            background: #ffeb3b;
+            color: #424242;
+            font-weight: 600;
+        }
+
+        .mini-shift.past-shift:not(.past-off-shift) {
+            background: #388e3c !important;
+            color: white !important;
+        }
+
+        .mini-shift.past-off-shift {
+            background: #ffffff !important;
+            border: 1px solid #e0e0e0 !important;
+            color: transparent !important;
+        }
+
         .mini-day.today {
-            background: #1e40af;
-            border: 1px solid #4285f4;
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
         }
 
         .mini-day.past-day {
-            background: #1f2937;
+            background: #e8f5e8;
         }
 
         .mini-day.future-day {
-            background: #2d2d2d;
+            background: #ffffff;
         }
 
         .mini-day.other-month {
@@ -263,7 +304,7 @@
         }
 
         .mini-day.other-month .mini-day-number {
-            color: #666;
+            color: #bdbdbd;
         }
 
         @media (max-width: 1200px) {
@@ -295,8 +336,107 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 414px) {
+            body {
+                padding: 6px;
+            }
+
+            .calendar-container {
+                border-radius: 10px;
+            }
+
+            .calendar-header {
+                padding: 6px 10px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 3px;
+                flex-wrap: wrap;
+            }
+
+            .view-toggle {
+                order: 1;
+            }
+
+            .nav-button {
+                min-width: 28px;
+                height: 28px;
+                font-size: 12px;
+                order: 2;
+                padding: 2px 6px;
+            }
+
+            .today-button {
+                height: 28px;
+                font-size: 10px;
+                padding: 2px 6px;
+                order: 3;
+            }
+
+            .year-range {
+                font-size: 12px;
+                order: 4;
+                flex: 1;
+                text-align: center;
+                min-width: 0;
+            }
+
+            .view-selector {
+                height: 28px;
+                font-size: 10px;
+                padding: 2px 6px;
+                min-width: 60px;
+            }
+
+            /* Stack year-range on second row */
+            .year-range {
+                order: 5;
+                width: 100%;
+                text-align: left;
+                font-size: 14px;
+            }
+
+            .year-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 12px;
+            }
+
+            .month-container {
+                padding: 12px;
+                border-radius: 3px;
+            }
+
+            .month-header {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .mini-day-header {
+                padding: 3px 1px;
+                font-size: 9px;
+            }
+
+            .mini-day {
+                min-height: 22px;
+                padding: 1px;
+            }
+
+            .mini-day-number {
+                font-size: 8px;
+            }
+
+            .mini-shift {
+                width: 10px;
+                height: 6px;
+                font-size: 5px;
+                line-height: 6px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="calendar-container">
         <div class="calendar-header">
@@ -304,7 +444,7 @@
             <button class="today-button" onclick="goToThisYear()">This Year</button>
             <div class="year-range" id="yearRange">2025</div>
             <button class="nav-button" onclick="nextYear()">›</button>
-            
+
             <div class="view-toggle">
                 <button class="view-selector" onclick="toggleDropdown()">
                     Year
@@ -346,7 +486,7 @@
         function generateMiniCalendar(month, year, rosterData) {
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'];
-            
+
             const monthContainer = document.createElement('div');
             monthContainer.className = 'month-container';
 
@@ -410,8 +550,39 @@
                     }
 
                     const shiftElement = document.createElement('div');
-                    shiftElement.className = `mini-shift ${formatShiftType(rosterEntry.shift)}`;
+                    let shiftClasses = `mini-shift ${formatShiftType(rosterEntry.shift)}`;
+
+                    // Add past-shift class for past days
+                    if (dateOnly < today) {
+                        shiftClasses += ' past-shift';
+                    }
+
+                    shiftElement.className = shiftClasses;
                     shiftElement.textContent = rosterEntry.shift;
+                    dayElement.appendChild(shiftElement);
+                } else if (rosterEntry && rosterEntry.shift.startsWith('OFF')) {
+                    // Handle OFF days
+                    const dateOnly = new Date(date);
+                    dateOnly.setHours(0, 0, 0, 0);
+
+                    if (dateOnly.getTime() === today.getTime()) {
+                        dayElement.classList.add('today');
+                    } else if (dateOnly < today) {
+                        dayElement.classList.add('past-day');
+                    } else {
+                        dayElement.classList.add('future-day');
+                    }
+
+                    const shiftElement = document.createElement('div');
+                    let shiftClasses = `mini-shift ${formatShiftType(rosterEntry.shift)}`;
+
+                    if (dateOnly < today) {
+                        shiftClasses += ' past-off-shift';
+                    }
+
+                    shiftElement.className = shiftClasses;
+                    // Don't show text for OFF days
+                    shiftElement.innerHTML = 'OFF';
                     dayElement.appendChild(shiftElement);
                 }
 
@@ -453,13 +624,13 @@
         function toggleDropdown() {
             const dropdown = document.getElementById('viewDropdown');
             const selector = document.querySelector('.view-selector');
-            
+
             dropdown.classList.toggle('show');
             selector.classList.toggle('open');
         }
 
         // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const viewToggle = document.querySelector('.view-toggle');
             if (!viewToggle.contains(event.target)) {
                 document.getElementById('viewDropdown').classList.remove('show');
@@ -471,4 +642,5 @@
         generateYearView();
     </script>
 </body>
+
 </html>
